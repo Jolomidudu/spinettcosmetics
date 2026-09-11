@@ -52,6 +52,9 @@ export const wishlist = createSlice({
     removeAllItemsFromWishlist: (state) => {
       state.items = [];
     },
+    hydrateWishlist: (state, action: PayloadAction<WishListItem[]>) => {
+      state.items = action.payload;
+    },
   },
 });
 
@@ -59,5 +62,6 @@ export const {
   addItemToWishlist,
   removeItemFromWishlist,
   removeAllItemsFromWishlist,
+  hydrateWishlist,
 } = wishlist.actions;
 export default wishlist.reducer;

@@ -1,62 +1,37 @@
 "use client";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumb from "../Common/Breadcrumb";
 import Image from "next/image";
 import Newsletter from "../Common/Newsletter";
 import RecentlyViewdItems from "./RecentlyViewd";
 import { usePreviewSlider } from "@/app/context/PreviewSliderContext";
-import { useAppSelector } from "@/redux/store";
+import { useCartModalContext } from "@/app/context/CartSidebarModalContext";
+import { AppDispatch, useAppSelector } from "@/redux/store";
+import { addItemToCart } from "@/redux/features/cart-slice";
+import { useDispatch } from "react-redux";
 
 const ShopDetails = () => {
-  const [activeColor, setActiveColor] = useState("blue");
   const { openPreviewModal } = usePreviewSlider();
   const [previewImg, setPreviewImg] = useState(0);
-
-  const [storage, setStorage] = useState("gb128");
-  const [type, setType] = useState("active");
-  const [sim, setSim] = useState("dual");
   const [quantity, setQuantity] = useState(1);
+  const [selectedShade, setSelectedShade] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
+  const { openCartModal } = useCartModalContext();
 
   const [activeTab, setActiveTab] = useState("tabOne");
 
-  const storages = [
-    {
-      id: "gb128",
-      title: "128 GB",
-    },
-    {
-      id: "gb256",
-      title: "256 GB",
-    },
-    {
-      id: "gb512",
-      title: "521 GB",
-    },
-  ];
-
-  const types = [
-    {
-      id: "active",
-      title: "Active",
-    },
-
-    {
-      id: "inactive",
-      title: "Inactive",
-    },
-  ];
-
-  const sims = [
-    {
-      id: "dual",
-      title: "Dual",
-    },
-
-    {
-      id: "e-sim",
-      title: "E Sim",
-    },
-  ];
+  const colors: string[] = [];
+  const storages: { id: string; title: string }[] = [];
+  const types: { id: string; title: string }[] = [];
+  const sims: { id: string; title: string }[] = [];
+  const setActiveColor = (..._: string[]) => undefined;
+  const setStorage = (..._: string[]) => undefined;
+  const setType = (..._: string[]) => undefined;
+  const setSim = (..._: string[]) => undefined;
+  const activeColor = "";
+  const storage = "";
+  const type = "";
+  const sim = "";
 
   const tabs = [
     {
@@ -73,7 +48,6 @@ const ShopDetails = () => {
     },
   ];
 
-  const colors = ["red", "blue", "orange", "pink", "purple"];
 
   const alreadyExist = localStorage.getItem("productDetails");
   const productFromStorage = useAppSelector(
@@ -86,9 +60,24 @@ const ShopDetails = () => {
     localStorage.setItem("productDetails", JSON.stringify(product));
   }, [product]);
 
+  useEffect(() => {
+    setSelectedShade(product.shades?.[0]?.name || "");
+  }, [product]);
+
   // pass the product here when you get the real data.
   const handlePreviewSlider = () => {
     openPreviewModal();
+  };
+
+  const handlePurchase = () => {
+    dispatch(
+      addItemToCart({
+        ...product,
+        quantity,
+        title: selectedShade ? `${product.title} - ${selectedShade}` : product.title,
+      })
+    );
+    openCartModal();
   };
 
   return (
@@ -370,8 +359,102 @@ const ShopDetails = () => {
                     </li>
                   </ul>
 
+                  <div className="mt-7.5 border-y border-[#E8DCD7] py-6">
+                    <p className="text-sm uppercase tracking-[0.18em] text-[#A47768]">
+                      {product.category || "Beauty essential"}
+                      {product.routineStep && ` / ${product.routineStep}`}
+                    </p>
+                    <p className="mt-3 text-base leading-7 text-dark-3">
+                      {product.description || "Thoughtfully made essentials for your everyday ritual."}
+                    </p>
+
+                    {product.benefits?.length ? (
+                      <div className="mt-5 grid gap-2 sm:grid-cols-3">
+                        {product.benefits.map((benefit: string) => (
+                          <div key={benefit} className="rounded-md bg-[#FBF4F0] px-3 py-3 text-sm text-dark">
+                            {benefit}
+                          </div>
+                        ))}
+                      </div>
+                    ) : null}
+
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {product.labels?.map((label: string) => (
+                        <span key={label} className="rounded-full border border-[#D9B9AA] px-3 py-1 text-xs uppercase tracking-[0.12em] text-[#8C6254]">
+                          {label}
+                        </span>
+                      ))}
+                    </div>
+
+                    {product.shades?.length ? (
+                      <div className="mt-5">
+                        <p className="mb-2 text-sm font-medium text-dark">Shade: {selectedShade || product.shade || product.shades[0].name}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {product.shades.map((shade: { name: string; value: string }) => (
+                            <button
+                              key={shade.name}
+                              type="button"
+                              aria-label={`Select ${shade.name} shade`}
+                              aria-pressed={selectedShade === shade.name}
+                              onClick={() => setSelectedShade(shade.name)}
+                              className={`h-8 w-8 rounded-full border-2 border-white shadow-[0_0_0_1px_#D8C6BE] ${selectedShade === shade.name ? "ring-2 ring-[#B86F78] ring-offset-2" : ""}`}
+                              style={{ backgroundColor: shade.value }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
+
+                    <div className="mt-5 grid gap-4 text-sm sm:grid-cols-2">
+                      {product.skinTypes?.length ? (
+                        <div>
+                          <p className="font-medium text-dark">Best for</p>
+                          <p className="mt-1 text-dark-3">{product.skinTypes.join(" · ")}</p>
+                        </div>
+                      ) : null}
+                      {product.ingredients?.length ? (
+                        <div>
+                          <p className="font-medium text-dark">Key ingredients</p>
+                          <p className="mt-1 text-dark-3">{product.ingredients.join(" · ")}</p>
+                        </div>
+                      ) : null}
+                    </div>
+
+                    <details className="mt-6 border-t border-[#E8DCD7] pt-4">
+                      <summary className="cursor-pointer font-medium text-dark">FAQs and skin notes</summary>
+                      <div className="mt-3 space-y-3 text-sm leading-6 text-dark-3">
+                        <p><strong className="text-dark">Can I use it daily?</strong> Yes. Begin once daily and build up as your skin becomes familiar with the formula.</p>
+                        <p><strong className="text-dark">Is it suitable for sensitive skin?</strong> Review the ingredient list and patch test first, especially when introducing a new active.</p>
+                        <p><strong className="text-dark">Any warnings?</strong> For external use only. Avoid contact with eyes and discontinue use if irritation occurs.</p>
+                      </div>
+                    </details>
+                  </div>
+
                   <form onSubmit={(e) => e.preventDefault()}>
-                    <div className="flex flex-col gap-4.5 border-y border-gray-3 mt-7.5 mb-9 py-9">
+                    <div className="mt-7.5 mb-9 grid gap-4 rounded-lg border-y border-[#E8DCD7] bg-[#FFFAF7] py-6 sm:grid-cols-2">
+                      <div className="px-5">
+                        <p className="text-sm font-medium uppercase tracking-[0.14em] text-[#8C6254]">How to use</p>
+                        <p className="mt-2 text-sm leading-6 text-dark-3">
+                          {product.routineStep === "cleanse"
+                            ? "Massage onto damp skin, then rinse with warm water. Use morning and evening."
+                            : product.routineStep === "protect"
+                              ? "Apply generously as the final step of your morning routine and reapply throughout the day."
+                              : "Apply a small amount to clean skin as the indicated step in your daily ritual."}
+                        </p>
+                      </div>
+                      <div className="border-t border-[#E8DCD7] px-5 pt-5 sm:border-l sm:border-t-0 sm:pt-0">
+                        <p className="text-sm font-medium uppercase tracking-[0.14em] text-[#8C6254]">Good to know</p>
+                        <p className="mt-2 text-sm leading-6 text-dark-3">
+                          {product.size || "Made in small batches with considered ingredients."}
+                          {product.finish ? ` · ${product.finish} finish.` : ""}
+                        </p>
+                        {product.fragranceNotes?.length ? (
+                          <p className="mt-2 text-sm text-dark-3">Notes: {product.fragranceNotes.join(" · ")}</p>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    {false && (<div className="flex flex-col gap-4.5 border-y border-gray-3 mt-7.5 mb-9 py-9">
                       {/* <!-- details item --> */}
                       <div className="flex items-center gap-4">
                         <div className="min-w-[65px]">
@@ -609,7 +692,7 @@ const ShopDetails = () => {
                           ))}
                         </div>
                       </div>
-                    </div>
+                    </div>)}
 
                     <div className="flex flex-wrap items-center gap-4.5">
                       <div className="flex items-center rounded-md border border-gray-3">
@@ -665,7 +748,11 @@ const ShopDetails = () => {
                       </div>
 
                       <a
-                        href="#"
+                        href="/cart"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          handlePurchase();
+                        }}
                         className="inline-flex font-medium text-white bg-blue py-3 px-7 rounded-md ease-out duration-200 hover:bg-blue-dark"
                       >
                         Purchase Now
@@ -726,25 +813,17 @@ const ShopDetails = () => {
                 >
                   <div className="max-w-[670px] w-full">
                     <h2 className="font-medium text-2xl text-dark mb-7">
-                      Specifications:
+                      The ritual
                     </h2>
 
                     <p className="mb-6">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the
-                      industry&apos;s standard dummy text ever since the 1500s,
-                      when an unknown printer took a galley of type and
-                      scrambled it to make a type specimen book.
+                      Designed to fit beautifully into an everyday routine, this formula brings focused care without unnecessary complexity.
                     </p>
                     <p className="mb-6">
-                      It has survived not only five centuries, but also the leap
-                      into electronic typesetting, remaining essentially
-                      unchanged. It was popularised in the 1960s.
+                      Use it consistently as part of your {product.routineStep || "daily"} ritual and allow a moment for the texture to settle before layering the next step.
                     </p>
                     <p>
-                      with the release of Letraset sheets containing Lorem Ipsum
-                      passages, and more recently with desktop publishing
-                      software like Aldus PageMaker including versions.
+                      Pair it with the rest of your Spinett routine for skin that feels comfortable, cared for, and naturally luminous.
                     </p>
                   </div>
 
@@ -754,16 +833,10 @@ const ShopDetails = () => {
                     </h2>
 
                     <p className="mb-6">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the
-                      industry&apos;s standard dummy text ever since the 1500s,
-                      when an unknown printer took a galley of type and
-                      scrambled it to make a type specimen book.
+                      Store away from direct heat and sunlight. Patch test new products when your skin is sensitive, and discontinue use if irritation occurs.
                     </p>
                     <p>
-                      It has survived not only five centuries, but also the leap
-                      into electronic typesetting, remaining essentially
-                      unchanged. It was popularised in the 1960s.
+                      For external use only. Keep the product closed between uses to preserve its texture and freshness.
                     </p>
                   </div>
                 </div>
@@ -782,7 +855,7 @@ const ShopDetails = () => {
                       <p className="text-sm sm:text-base text-dark">Brand</p>
                     </div>
                     <div className="w-full">
-                      <p className="text-sm sm:text-base text-dark">Apple</p>
+                      <p className="text-sm sm:text-base text-dark">Spinett Cosmetics</p>
                     </div>
                   </div>
 
@@ -793,7 +866,7 @@ const ShopDetails = () => {
                     </div>
                     <div className="w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        iPhone 14 Plus
+                        {product.title}
                       </p>
                     </div>
                   </div>
@@ -802,12 +875,12 @@ const ShopDetails = () => {
                   <div className="rounded-md even:bg-gray-1 flex py-4 px-4 sm:px-5">
                     <div className="max-w-[450px] min-w-[140px] w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        Display Size
+                        Size
                       </p>
                     </div>
                     <div className="w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        6.7 inches
+                        {product.size || "Everyday essential"}
                       </p>
                     </div>
                   </div>
@@ -816,13 +889,12 @@ const ShopDetails = () => {
                   <div className="rounded-md even:bg-gray-1 flex py-4 px-4 sm:px-5">
                     <div className="max-w-[450px] min-w-[140px] w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        Display Type
+                        Finish
                       </p>
                     </div>
                     <div className="w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        Super Retina XDR OLED, HDR10, Dolby Vision, 800 nits
-                        (HBM), 1200 nits (peak)
+                        {product.finish || "Comfortable and radiant"}
                       </p>
                     </div>
                   </div>
@@ -831,12 +903,12 @@ const ShopDetails = () => {
                   <div className="rounded-md even:bg-gray-1 flex py-4 px-4 sm:px-5">
                     <div className="max-w-[450px] min-w-[140px] w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        Display Resolution
+                        Skin types
                       </p>
                     </div>
                     <div className="w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        1284 x 2778 pixels, 19.5:9 ratio
+                        {product.skinTypes?.join(" / ") || "All skin types"}
                       </p>
                     </div>
                   </div>
@@ -844,11 +916,11 @@ const ShopDetails = () => {
                   {/* <!-- info item --> */}
                   <div className="rounded-md even:bg-gray-1 flex py-4 px-4 sm:px-5">
                     <div className="max-w-[450px] min-w-[140px] w-full">
-                      <p className="text-sm sm:text-base text-dark">Chipset</p>
+                        <p className="text-sm sm:text-base text-dark">Key ingredients</p>
                     </div>
                     <div className="w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        Apple A15 Bionic (5 nm)
+                        {product.ingredients?.join(" / ") || "Thoughtfully selected botanicals"}
                       </p>
                     </div>
                   </div>
@@ -856,25 +928,11 @@ const ShopDetails = () => {
                   {/* <!-- info item --> */}
                   <div className="rounded-md even:bg-gray-1 flex py-4 px-4 sm:px-5">
                     <div className="max-w-[450px] min-w-[140px] w-full">
-                      <p className="text-sm sm:text-base text-dark">Memory</p>
+                        <p className="text-sm sm:text-base text-dark">Concerns</p>
                     </div>
                     <div className="w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        128GB 6GB RAM | 256GB 6GB RAM | 512GB 6GB RAM
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* <!-- info item --> */}
-                  <div className="rounded-md even:bg-gray-1 flex py-4 px-4 sm:px-5">
-                    <div className="max-w-[450px] min-w-[140px] w-full">
-                      <p className="text-sm sm:text-base text-dark">
-                        Main Camera
-                      </p>
-                    </div>
-                    <div className="w-full">
-                      <p className="text-sm sm:text-base text-dark">
-                        12MP + 12MP | 4K@24/25/30/60fps, stereo sound rec.
+                        {product.concerns?.join(" / ") || "Daily comfort and glow"}
                       </p>
                     </div>
                   </div>
@@ -883,13 +941,12 @@ const ShopDetails = () => {
                   <div className="rounded-md even:bg-gray-1 flex py-4 px-4 sm:px-5">
                     <div className="max-w-[450px] min-w-[140px] w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        Selfie Camera
+                        Benefits
                       </p>
                     </div>
                     <div className="w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        12 MP | 4K@24/25/30/60fps, 1080p@25/30/60/120fps,
-                        gyro-EIS
+                        {product.benefits?.join(" / ") || "Supports a simple, consistent ritual"}
                       </p>
                     </div>
                   </div>
@@ -898,13 +955,26 @@ const ShopDetails = () => {
                   <div className="rounded-md even:bg-gray-1 flex py-4 px-4 sm:px-5">
                     <div className="max-w-[450px] min-w-[140px] w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        Battery Info
+                        Fragrance notes
                       </p>
                     </div>
                     <div className="w-full">
                       <p className="text-sm sm:text-base text-dark">
-                        Li-Ion 4323 mAh, non-removable | 15W wireless (MagSafe),
-                        7.5W wireless (Qi)
+                        {product.fragranceNotes?.join(" / ") || "Soft and subtle"}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* <!-- info item --> */}
+                  <div className="rounded-md even:bg-gray-1 flex py-4 px-4 sm:px-5">
+                    <div className="max-w-[450px] min-w-[140px] w-full">
+                      <p className="text-sm sm:text-base text-dark">
+                        Formulation
+                      </p>
+                    </div>
+                    <div className="w-full">
+                      <p className="text-sm sm:text-base text-dark">
+                        {product.labels?.join(" / ") || "Made with care"}
                       </p>
                     </div>
                   </div>
@@ -940,10 +1010,10 @@ const ShopDetails = () => {
 
                             <div>
                               <h3 className="font-medium text-dark">
-                                Davis Dorwart
+                                Amelia Hart
                               </h3>
                               <p className="text-custom-sm">
-                                Serial Entrepreneur
+                                Verified customer
                               </p>
                             </div>
                           </a>
@@ -1032,9 +1102,7 @@ const ShopDetails = () => {
                         </div>
 
                         <p className="text-dark mt-6">
-                          “Lorem ipsum dolor sit amet, adipiscing elit. Donec
-                          malesuada justo vitaeaugue suscipit beautiful
-                          vehicula’’
+                          “My skin feels calmer and more hydrated after just one week. The serum has become my favorite morning step.”
                         </p>
                       </div>
 
@@ -1054,10 +1122,10 @@ const ShopDetails = () => {
 
                             <div>
                               <h3 className="font-medium text-dark">
-                                Davis Dorwart
+                                Nia Brooks
                               </h3>
                               <p className="text-custom-sm">
-                                Serial Entrepreneur
+                                Verified customer
                               </p>
                             </div>
                           </a>
@@ -1146,9 +1214,7 @@ const ShopDetails = () => {
                         </div>
 
                         <p className="text-dark mt-6">
-                          “Lorem ipsum dolor sit amet, adipiscing elit. Donec
-                          malesuada justo vitaeaugue suscipit beautiful
-                          vehicula’’
+                          “The cleanser removes everything gently and leaves my skin soft instead of tight.”
                         </p>
                       </div>
 
@@ -1168,10 +1234,10 @@ const ShopDetails = () => {
 
                             <div>
                               <h3 className="font-medium text-dark">
-                                Davis Dorwart
+                                Sofia Lane
                               </h3>
                               <p className="text-custom-sm">
-                                Serial Entrepreneur
+                                Verified customer
                               </p>
                             </div>
                           </a>
@@ -1260,9 +1326,7 @@ const ShopDetails = () => {
                         </div>
 
                         <p className="text-dark mt-6">
-                          “Lorem ipsum dolor sit amet, adipiscing elit. Donec
-                          malesuada justo vitaeaugue suscipit beautiful
-                          vehicula’’
+                          “The mist is perfect for a midday reset. It gives my makeup a natural glow without feeling sticky.”
                         </p>
                       </div>
                     </div>

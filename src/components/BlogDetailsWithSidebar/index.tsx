@@ -44,53 +44,37 @@ const BlogDetailsWithSidebar = () => {
                 </span>
 
                 <h2 className="font-medium text-dark text-xl lg:text-2xl xl:text-custom-4xl mb-4">
-                  What information is needed for shipping?
+                  How to build a calm morning skincare ritual
                 </h2>
 
                 <p className="mb-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer sit amet eros ac ipsum egestas dapibus. Vivamus
-                  gravida, ex non placerat tincidunt, lorem felis facilisis
-                  tellus, vitae bibendum purus felis eget tellus. In non rutrum
-                  ipsum. Morbi ut dui ante.
+                  A good morning routine does not need a crowded shelf. Begin with a gentle cleanse, add one treatment that answers your main concern, and finish with daily protection.
                 </p>
 
                 <p className="mb-6">
-                  Nunc faucibus libero sem, quis placerat nisl pellentesque
-                  eget. Morbi porta velit ut leo sollicitudin, a faucibus purus
-                  faucibus. Maecenas mollis dui nec metus euismod, sed aliquam
-                  risus luctus.
+                  Give each layer a few moments to settle. This simple pause helps you notice what your skin actually enjoys and keeps the ritual feeling intentional rather than rushed.
                 </p>
 
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Quis enim lobortis scelerisque fermentum. Neque sodales ut
-                  etiam sit amet. Ligula ullamcorper malesuada proin libero nunc
-                  consequat interdum varius. Quam pellentesque nec nam aliquam
-                  sem et tortor consequat.
+                  Look for formulas that support comfort first: humectants for hydration, gentle antioxidants for brightness, and a mineral SPF to help protect the progress you make each day.
                 </p>
 
                 <div className="mt-7.5">
                   <h3 className="font-medium text-dark text-lg xl:text-[26px] xl:leading-[34px] mb-6">
-                    Digital marketplace for Ui/Ux designers.
+                    Keep the ritual simple
                   </h3>
 
                   <ul className="list-disc pl-6">
-                    <li>Consectetur adipiscing elit in voluptate velit.</li>
-                    <li>Mattis vulputate cupidatat.</li>
-                    <li>
-                      Vulputate enim nulla aliquet porttitor odio pellentesque
-                    </li>
-                    <li>Ligula ullamcorper malesuada proin</li>
+                    <li>Cleanse without leaving skin tight.</li>
+                    <li>Treat the concern you care about most.</li>
+                    <li>Hydrate with textures you enjoy using.</li>
+                    <li>Protect every morning.</li>
                   </ul>
                 </div>
 
                 <div className="rounded-xl bg-white pt-7.5 pb-6 px-4 sm:px-7.5 my-7.5">
                   <p className="italic text-dark text-center">
-                    ‘‘Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod incididunt utionals labore et dolore magna
-                    aliqua quis fermentum,,
+                    “The best routine is the one that feels good enough to repeat.”
                   </p>
 
                   <a
@@ -107,40 +91,26 @@ const BlogDetailsWithSidebar = () => {
                     </div>
 
                     <div>
-                      <h4 className="text-dark text-custom-sm">Jhon Drineo</h4>
-                      <p className="text-custom-xs">Entroprenor</p>
+                        <h4 className="text-dark text-custom-sm">The Spinett team</h4>
+                        <p className="text-custom-xs">Beauty editors</p>
                     </div>
                   </a>
                 </div>
 
                 <p className="mb-6">
-                  consectetur adipiscing elit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  mattis vulputate cupidatat.
+                  Your routine should adapt with your skin. On dry days, reach for a richer moisturizer; when skin feels congested, keep the rest of the ritual light and breathable.
                 </p>
 
                 <p className="mb-6">
-                  Nunc faucibus libero sem, quis placerat nisl pellentesque
-                  eget. Morbi porta velit ut leo sollicitudin, a faucibus purus
-                  faucibus. Maecenas mollis dui nec metus euismod, sed aliquam
-                  risus luctus.
+                  Consistency matters more than intensity. A few thoughtful steps repeated daily will always serve your skin better than an overcomplicated routine you avoid.
                 </p>
 
                 <p className="mb-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Quis enim lobortis scelerisque fermentum. Neque sodales ut
-                  etiam sit amet. Ligula ullamcorper malesuada proin libero nunc
-                  consequat interdum varius. Quam pellentesque nec nam aliquam
-                  sem et tortor consequat.
+                  Finish with sunscreen in the morning and a nourishing final layer at night. Then let your skin do the quiet work of restoring itself.
                 </p>
 
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer sit amet eros ac ipsum egestas dapibus. Vivamus
-                  gravida, ex non placerat tincidunt, lorem felis facilisis
-                  tellus, vitae bibendum purus felis eget tellus. In non rutrum
-                  ipsum. Morbi ut dui ante.
+                  A beautiful ritual is not about perfection. It is a small daily promise to pay attention to what your skin needs today.
                 </p>
 
                 <div className="flex flex-wrap items-center justify-between gap-10 mt-10">
@@ -153,7 +123,7 @@ const BlogDetailsWithSidebar = () => {
                           className="inline-flex hover:text-white border border-gray-3 bg-white py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                           href="#"
                         >
-                          Desktop
+                          Hydration
                         </a>
                       </li>
 
@@ -162,7 +132,7 @@ const BlogDetailsWithSidebar = () => {
                           className="inline-flex hover:text-white border border-gray-3 bg-white py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                           href="#"
                         >
-                          Macbook
+                          Skin barrier
                         </a>
                       </li>
 
@@ -171,7 +141,7 @@ const BlogDetailsWithSidebar = () => {
                           className="inline-flex hover:text-white border border-gray-3 bg-white py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                           href="#"
                         >
-                          PC
+                          Mineral SPF
                         </a>
                       </li>
                     </ul>
@@ -285,21 +255,21 @@ const BlogDetailsWithSidebar = () => {
                 <div className="p-4 sm:p-6">
                   <div className="flex flex-col gap-3">
                     <button className="group flex items-center justify-between ease-out duration-200 text-dark hover:text-blue">
-                      Desktop
+                      Ingredient notes
                       <span className="inline-flex rounded-[30px] bg-gray-2 text-custom-xs px-1.5 ease-out duration-200 group-hover:text-white group-hover:bg-blue">
                         12
                       </span>
                     </button>
 
                     <button className="group flex items-center justify-between ease-out duration-200 text-dark hover:text-blue">
-                      Laptop
+                      Routine guides
                       <span className="inline-flex rounded-[30px] bg-gray-2 text-custom-xs px-1.5 ease-out duration-200 group-hover:text-white group-hover:bg-blue">
                         25
                       </span>
                     </button>
 
                     <button className="group flex items-center justify-between ease-out duration-200 text-dark hover:text-blue">
-                      Monitor
+                      Skin concerns
                       <span className="inline-flex rounded-[30px] bg-gray-2 text-custom-xs px-1.5 ease-out duration-200 group-hover:text-white group-hover:bg-blue">
                         23
                       </span>
@@ -327,14 +297,14 @@ const BlogDetailsWithSidebar = () => {
                     </button>
 
                     <button className="group flex items-center justify-between ease-out duration-200 text-dark hover:text-blue">
-                      Watch
+                      Body care
                       <span className="inline-flex rounded-[30px] bg-gray-2 text-custom-xs px-1.5 ease-out duration-200 group-hover:text-white group-hover:bg-blue">
                         17
                       </span>
                     </button>
 
                     <button className="group flex items-center justify-between ease-out duration-200 text-dark hover:text-blue">
-                      Mouse
+                      Beauty basics
                       <span className="inline-flex rounded-[30px] bg-gray-2 text-custom-xs px-1.5 ease-out duration-200 group-hover:text-white group-hover:bg-blue">
                         08
                       </span>
@@ -355,21 +325,21 @@ const BlogDetailsWithSidebar = () => {
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      Desktop
+                      Hydration
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      Macbook
+                      Skin barrier
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      PC
+                      Mineral SPF
                     </a>
 
                     <a
@@ -383,28 +353,28 @@ const BlogDetailsWithSidebar = () => {
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      USB Cable
+                      Ingredient notes
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      Mouse
+                      Routine guides
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      Windows PC
+                      Clean beauty
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      Monitor
+                      Body care
                     </a>
                   </div>
                 </div>

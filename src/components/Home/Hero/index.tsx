@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <section className="overflow-hidden pb-10 lg:pb-12.5 xl:pb-15 pt-57.5 sm:pt-45 lg:pt-30 xl:pt-51.5 bg-[#E5EAF4]">
+    <section className="overflow-hidden pb-10 lg:pb-12.5 xl:pb-15 pt-57.5 sm:pt-45 lg:pt-30 xl:pt-51.5 bg-[#F7EEEA]">
       <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
         <div className="flex flex-wrap gap-5">
           <div className="xl:max-w-[757px] w-full">
@@ -29,7 +29,7 @@ const Hero = () => {
                 <div className="flex items-center gap-14">
                   <div>
                     <h2 className="max-w-[153px] font-semibold text-dark text-xl mb-20">
-                      <a href="#"> iPhone 14 Plus & 14 Pro Max </a>
+                      <a href="/shop-without-sidebar"> Rose Renewal Serum </a>
                     </h2>
 
                     <div>
@@ -38,10 +38,10 @@ const Hero = () => {
                       </p>
                       <span className="flex items-center gap-3">
                         <span className="font-medium text-heading-5 text-red">
-                          $699
+                          $64
                         </span>
                         <span className="font-medium text-2xl text-dark-4 line-through">
-                          $999
+                          $89
                         </span>
                       </span>
                     </div>
@@ -50,7 +50,7 @@ const Hero = () => {
                   <div>
                     <Image
                       src="/images/hero/hero-02.png"
-                      alt="mobile image"
+                      alt="Rose Renewal Serum"
                       width={123}
                       height={161}
                     />
@@ -61,7 +61,7 @@ const Hero = () => {
                 <div className="flex items-center gap-14">
                   <div>
                     <h2 className="max-w-[153px] font-semibold text-dark text-xl mb-20">
-                      <a href="#"> Wireless Headphone </a>
+                      <a href="/shop-without-sidebar"> Velvet Skin Cleanser </a>
                     </h2>
 
                     <div>
@@ -70,10 +70,10 @@ const Hero = () => {
                       </p>
                       <span className="flex items-center gap-3">
                         <span className="font-medium text-heading-5 text-red">
-                          $699
+                          $31
                         </span>
                         <span className="font-medium text-2xl text-dark-4 line-through">
-                          $999
+                          $42
                         </span>
                       </span>
                     </div>
@@ -82,7 +82,7 @@ const Hero = () => {
                   <div>
                     <Image
                       src="/images/hero/hero-01.png"
-                      alt="mobile image"
+                      alt="Velvet Skin Cleanser"
                       width={123}
                       height={161}
                     />

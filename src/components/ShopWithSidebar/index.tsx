@@ -7,6 +7,7 @@ import GenderDropdown from "./GenderDropdown";
 import SizeDropdown from "./SizeDropdown";
 import ColorsDropdwon from "./ColorsDropdwon";
 import PriceDropdown from "./PriceDropdown";
+import { Product } from "@/types/product";
 import shopData from "../Shop/shopData";
 import SingleGridItem from "../Shop/SingleGridItem";
 import SingleListItem from "../Shop/SingleListItem";
@@ -15,6 +16,16 @@ const ShopWithSidebar = () => {
   const [productStyle, setProductStyle] = useState("grid");
   const [productSidebar, setProductSidebar] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("featured");
+  const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({
+    category: [],
+    skinTypes: [],
+    concerns: [],
+    ingredients: [],
+    routineStep: [],
+    finish: [],
+  });
 
   const handleStickyMenu = () => {
     if (window.scrollY >= 80) {
@@ -24,40 +35,34 @@ const ShopWithSidebar = () => {
     }
   };
 
-  const options = [
-    { label: "Latest Products", value: "0" },
-    { label: "Best Selling", value: "1" },
-    { label: "Old Products", value: "2" },
-  ];
-
   const categories = [
     {
-      name: "Desktop",
+      name: "Skincare",
       products: 10,
       isRefined: true,
     },
     {
-      name: "Laptop",
+      name: "Makeup",
       products: 12,
       isRefined: false,
     },
     {
-      name: "Monitor",
+      name: "Body Care",
       products: 30,
       isRefined: false,
     },
     {
-      name: "UPS",
+      name: "Hair Care",
       products: 23,
       isRefined: false,
     },
     {
-      name: "Phone",
+      name: "Lip Care",
       products: 10,
       isRefined: false,
     },
     {
-      name: "Watch",
+      name: "Gift Sets",
       products: 13,
       isRefined: false,
     },
@@ -65,7 +70,7 @@ const ShopWithSidebar = () => {
 
   const genders = [
     {
-      name: "Men",
+      name: "All skin types",
       products: 10,
     },
     {
@@ -78,8 +83,66 @@ const ShopWithSidebar = () => {
     },
   ];
 
+  const filterGroups = [
+    { key: "category", label: "Category", values: Array.from(new Set(shopData.map((item) => item.category).filter(Boolean))) },
+    { key: "skinTypes", label: "Skin type", values: Array.from(new Set(shopData.flatMap((item) => item.skinTypes || []))) },
+    { key: "concerns", label: "Skin concern", values: Array.from(new Set(shopData.flatMap((item) => item.concerns || []))) },
+    { key: "ingredients", label: "Ingredient", values: Array.from(new Set(shopData.flatMap((item) => item.ingredients || []))) },
+    { key: "routineStep", label: "Routine step", values: Array.from(new Set(shopData.map((item) => item.routineStep).filter(Boolean))) },
+    { key: "finish", label: "Finish", values: Array.from(new Set(shopData.map((item) => item.finish).filter(Boolean))) },
+  ];
+
+  const toggleFilter = (key: string, value: string) => {
+    setActiveFilters((current) => ({
+      ...current,
+      [key]: current[key].includes(value)
+        ? current[key].filter((item) => item !== value)
+        : [...current[key], value],
+    }));
+  };
+
+  const matchesFilters = (product: Product) => {
+    const searchable = `${product.title} ${product.description || ""} ${product.category || ""} ${(product.ingredients || []).join(" ")} ${(product.concerns || []).join(" ")}`.toLowerCase();
+    if (searchQuery && !searchable.includes(searchQuery.toLowerCase())) return false;
+    return Object.entries(activeFilters).every(([key, values]) => {
+      if (!values.length) return true;
+      if (key === "category" && values.includes("Gift Sets")) {
+        return [1, 2, 5, 7, 8].includes(product.id);
+      }
+      const productValues = key === "category" || key === "routineStep" || key === "finish"
+        ? [product[key as keyof Product] as string]
+        : (product[key as keyof Product] as string[] | undefined) || [];
+      return values.some((value) => productValues.includes(value));
+    });
+  };
+
+  const visibleProducts = [...shopData.filter(matchesFilters)].sort((first, second) => {
+    if (sortBy === "price-low") return first.discountedPrice - second.discountedPrice;
+    if (sortBy === "price-high") return second.discountedPrice - first.discountedPrice;
+    if (sortBy === "rating") return second.reviews - first.reviews;
+    if (sortBy === "newest") return second.id - first.id;
+    return first.id - second.id;
+  });
+
   useEffect(() => {
     window.addEventListener("scroll", handleStickyMenu);
+
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get("category");
+    const concern = params.get("concern");
+    const ingredient = params.get("ingredient");
+    const routineStep = params.get("routineStep");
+    const sort = params.get("sort");
+    if (sort === "rating" || sort === "newest" || sort === "price-low" || sort === "price-high") {
+      setSortBy(sort);
+    }
+    setActiveFilters((current) => ({
+      ...current,
+      ...(category ? { category: [category] } : {}),
+      ...(concern ? { concerns: [concern] } : {}),
+      ...(ingredient ? { ingredients: [ingredient] } : {}),
+      ...(routineStep ? { routineStep: [routineStep] } : {}),
+    }));
 
     // closing sidebar while clicking outside
     function handleClickOutside(event) {
@@ -103,7 +166,7 @@ const ShopWithSidebar = () => {
         title={"Explore All Products"}
         pages={["shop", "/", "shop with sidebar"]}
       />
-      <section className="overflow-hidden relative pb-20 pt-5 lg:pt-20 xl:pt-28 bg-[#f3f4f6]">
+      <section className="overflow-hidden relative pb-20 pt-5 lg:pt-20 xl:pt-28 bg-[#F7EEEA]">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex gap-7.5">
             {/* <!-- Sidebar Start --> */}
@@ -152,24 +215,37 @@ const ShopWithSidebar = () => {
                   <div className="bg-white shadow-1 rounded-lg py-4 px-5">
                     <div className="flex items-center justify-between">
                       <p>Filters:</p>
-                      <button className="text-blue">Clean All</button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setActiveFilters({ category: [], skinTypes: [], concerns: [], ingredients: [], routineStep: [], finish: [] });
+                          setSearchQuery("");
+                        }}
+                        className="text-blue"
+                      >
+                        Clean All
+                      </button>
                     </div>
                   </div>
 
-                  {/* <!-- category box --> */}
-                  <CategoryDropdown categories={categories} />
-
-                  {/* <!-- gender box --> */}
-                  <GenderDropdown genders={genders} />
-
-                  {/* // <!-- size box --> */}
-                  <SizeDropdown />
-
-                  {/* // <!-- color box --> */}
-                  <ColorsDropdwon />
-
-                  {/* // <!-- price range box --> */}
-                  <PriceDropdown />
+                  {filterGroups.map((group) => (
+                    <div key={group.key} className="rounded-lg bg-white px-5 py-4 shadow-1">
+                      <p className="mb-3 font-medium text-dark">{group.label}</p>
+                      <div className="flex max-h-48 flex-col gap-2 overflow-y-auto">
+                        {group.values.map((value) => (
+                          <label key={value} className="flex cursor-pointer items-center gap-2 text-sm text-dark-3">
+                            <input
+                              type="checkbox"
+                              checked={activeFilters[group.key].includes(value as string)}
+                              onChange={() => toggleFilter(group.key, value as string)}
+                              className="h-4 w-4 accent-[#B86F78]"
+                            />
+                            {value}
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </form>
             </div>
@@ -181,10 +257,29 @@ const ShopWithSidebar = () => {
                 <div className="flex items-center justify-between">
                   {/* <!-- top bar left --> */}
                   <div className="flex flex-wrap items-center gap-4">
-                    <CustomSelect options={options} />
+                    <input
+                      type="search"
+                      value={searchQuery}
+                      onChange={(event) => setSearchQuery(event.target.value)}
+                      placeholder="Search products, ingredients, or concerns"
+                      className="min-w-[220px] rounded-md border border-gray-3 bg-gray-1 px-3 py-2 text-sm outline-none focus:border-blue"
+                    />
+                    <label className="sr-only" htmlFor="shop-sort">Sort products</label>
+                    <select
+                      id="shop-sort"
+                      value={sortBy}
+                      onChange={(event) => setSortBy(event.target.value)}
+                      className="rounded-md border border-gray-3 bg-white px-3 py-2 text-sm text-dark outline-none"
+                    >
+                      <option value="featured">Featured</option>
+                      <option value="newest">Newest</option>
+                      <option value="rating">Top rated</option>
+                      <option value="price-low">Price: low to high</option>
+                      <option value="price-high">Price: high to low</option>
+                    </select>
 
                     <p>
-                      Showing <span className="text-dark">9 of 50</span>{" "}
+                      Showing <span className="text-dark">{visibleProducts.length}</span>{" "}
                       Products
                     </p>
                   </div>
@@ -278,11 +373,11 @@ const ShopWithSidebar = () => {
                     : "flex flex-col gap-7.5"
                 }`}
               >
-                {shopData.map((item, key) =>
+                {visibleProducts.map((item) =>
                   productStyle === "grid" ? (
-                    <SingleGridItem item={item} key={key} />
+                    <SingleGridItem item={item} key={item.id} />
                   ) : (
-                    <SingleListItem item={item} key={key} />
+                    <SingleListItem item={item} key={item.id} />
                   )
                 )}
               </div>

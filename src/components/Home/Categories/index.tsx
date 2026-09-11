@@ -70,10 +70,10 @@ const Categories = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                Categories
+                Shop your ritual
               </span>
               <h2 className="font-semibold text-xl xl:text-heading-5 text-dark">
-                Browse by Category
+                Find your beauty essentials
               </h2>
             </div>
 

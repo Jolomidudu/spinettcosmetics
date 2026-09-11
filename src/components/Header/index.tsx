@@ -37,14 +37,14 @@ const Header = () => {
   });
 
   const options = [
-    { label: "All Categories", value: "0" },
-    { label: "Desktop", value: "1" },
-    { label: "Laptop", value: "2" },
-    { label: "Monitor", value: "3" },
-    { label: "Phone", value: "4" },
-    { label: "Watch", value: "5" },
-    { label: "Mouse", value: "6" },
-    { label: "Tablet", value: "7" },
+    { label: "All Beauty", value: "0" },
+    { label: "Skincare", value: "1" },
+    { label: "Makeup", value: "2" },
+    { label: "Body Care", value: "3" },
+    { label: "Hair Care", value: "4" },
+    { label: "Lip Care", value: "5" },
+    { label: "Gift Sets", value: "6" },
+    { label: "New Arrivals", value: "7" },
   ];
 
   return (
@@ -62,13 +62,16 @@ const Header = () => {
         >
           {/* <!-- header top left --> */}
           <div className="xl:w-auto flex-col sm:flex-row w-full flex sm:justify-between sm:items-center gap-5 sm:gap-10">
-            <Link className="flex-shrink-0" href="/">
+            <Link className="flex flex-shrink-0 items-center gap-3" href="/">
               <Image
-                src="/images/logo/logo.svg"
+                src="/images/logo/sclogo.png"
                 alt="Logo"
-                width={219}
-                height={36}
+                width={60}
+                height={10}
               />
+              <span className="whitespace-nowrap text-lg font-semibold tracking-[0.02em] text-dark">
+                Spinett Cosmetics
+              </span>
             </Link>
 
             <div className="max-w-[475px] w-full">

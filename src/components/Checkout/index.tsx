@@ -7,11 +7,13 @@ import ShippingMethod from "./ShippingMethod";
 import PaymentMethod from "./PaymentMethod";
 import Coupon from "./Coupon";
 import Billing from "./Billing";
+import TrustStrip from "../Common/TrustStrip";
 
 const Checkout = () => {
   return (
     <>
       <Breadcrumb title={"Checkout"} pages={["checkout"]} />
+      <TrustStrip />
       <section className="overflow-hidden py-20 bg-gray-2">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <form>
@@ -71,7 +73,7 @@ const Checkout = () => {
                     {/* <!-- product item --> */}
                     <div className="flex items-center justify-between py-5 border-b border-gray-3">
                       <div>
-                        <p className="text-dark">iPhone 14 Plus , 6/128GB</p>
+                        <p className="text-dark">Rose Renewal Serum</p>
                       </div>
                       <div>
                         <p className="text-dark text-right">$899.00</p>
@@ -81,7 +83,7 @@ const Checkout = () => {
                     {/* <!-- product item --> */}
                     <div className="flex items-center justify-between py-5 border-b border-gray-3">
                       <div>
-                        <p className="text-dark">Asus RT Dual Band Router</p>
+                        <p className="text-dark">Velvet Skin Cleanser</p>
                       </div>
                       <div>
                         <p className="text-dark text-right">$129.00</p>
@@ -91,7 +93,7 @@ const Checkout = () => {
                     {/* <!-- product item --> */}
                     <div className="flex items-center justify-between py-5 border-b border-gray-3">
                       <div>
-                        <p className="text-dark">Havit HV-G69 USB Gamepad</p>
+                        <p className="text-dark">Daily Mineral Sunscreen</p>
                       </div>
                       <div>
                         <p className="text-dark text-right">$29.00</p>

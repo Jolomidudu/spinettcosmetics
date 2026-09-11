@@ -45,7 +45,7 @@ const HeroCarousal = () => {
             </p>
 
             <a
-              href="#"
+              href="/shop-without-sidebar"
               className="inline-flex font-medium text-white text-custom-sm rounded-md bg-[#C66B8C] py-3 px-9 ease-out duration-200 hover:bg-[#b95d7f] mt-10"
             >
               Shop Bestsellers
@@ -86,7 +86,7 @@ const HeroCarousal = () => {
             </p>
 
             <a
-              href="#"
+              href="/shop-without-sidebar"
               className="inline-flex font-medium text-white text-custom-sm rounded-md bg-dark py-3 px-9 ease-out duration-200 hover:bg-[#C66B8C] mt-10"
             >
               Explore Collection

@@ -10,7 +10,7 @@ const Categories = ({ categories }) => {
       <div className="p-4 sm:p-6">
         <div className="flex flex-col gap-3">
           <button className="group flex items-center justify-between ease-out duration-200 text-dark hover:text-blue">
-            Desktop
+            Ingredient notes
             <span className="inline-flex rounded-[30px] bg-gray-2 text-custom-xs px-1.5 ease-out duration-200 group-hover:text-white group-hover:bg-blue">
               12
             </span>

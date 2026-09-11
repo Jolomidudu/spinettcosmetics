@@ -9,6 +9,7 @@
 
   body {
     @apply font-euclid-circular-a font-normal text-base text-dark-3 relative z-1;
+    background: #fffdfb;
   }
 }
 
@@ -124,6 +125,11 @@ input[type='search']::-webkit-search-results-decoration {
 
 .hero-carousel .swiper-pagination-bullet-active {
   @apply w-5.5 bg-blue;
+}
+
+/* Keep legacy inline icons aligned with the cosmetics palette. */
+[fill="#3C50E0"] {
+  fill: #b86f78 !important;
 }
 
 .hero-carousel .swiper-pagination {

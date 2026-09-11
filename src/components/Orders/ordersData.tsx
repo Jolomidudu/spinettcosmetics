@@ -11,7 +11,7 @@ const ordersData = [
     createdAt: "18th May, 2022",
     status: "processing",
     total: "$100",
-    title: "Watchs",
+    title: "Gift Sets",
   },
   {
     orderId: "234c56",

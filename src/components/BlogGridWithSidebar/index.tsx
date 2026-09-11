@@ -11,27 +11,27 @@ import shopData from "../Shop/shopData";
 const BlogGridWithSidebar = () => {
   const categories = [
     {
-      name: "Desktop",
+      name: "Ingredient notes",
       products: 10,
     },
     {
-      name: "Laptop",
+      name: "Routine guides",
       products: 12,
     },
     {
-      name: "Monitor",
+      name: "Skin concerns",
       products: 30,
     },
     {
-      name: "UPS",
+      name: "Body care",
       products: 23,
     },
     {
-      name: "Phone",
+      name: "Beauty basics",
       products: 10,
     },
     {
-      name: "Watch",
+      name: "Wellness rituals",
       products: 13,
     },
   ];
@@ -196,56 +196,56 @@ const BlogGridWithSidebar = () => {
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      Desktop
+                      Hydration
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      Macbook
+                      Skin barrier
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      PC
+                      Mineral SPF
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      Watch
+                      Body care
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      USB Cable
+                      Ingredient notes
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      Mouse
+                      Routine guides
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      Windows PC
+                      Clean beauty
                     </a>
 
                     <a
                       className="inline-flex hover:text-white border border-gray-3 py-2 px-4 rounded-md ease-out duration-200 hover:bg-blue hover:border-blue"
                       href="#"
                     >
-                      Monitor
+                      Skin concerns
                     </a>
                   </div>
                 </div>

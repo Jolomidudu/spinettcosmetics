@@ -376,7 +376,7 @@ const MyAccount = () => {
                           fill=""
                         />
                       </svg>
-                      Email: jamse@example.com
+                      Email: hello@spinettcosmetics.com
                     </p>
 
                     <p className="flex items-center gap-2.5 text-custom-sm">
@@ -508,7 +508,7 @@ const MyAccount = () => {
                           fill=""
                         />
                       </svg>
-                      Email: jamse@example.com
+                      Email: hello@spinettcosmetics.com
                     </p>
 
                     <p className="flex items-center gap-2.5 text-custom-sm">
