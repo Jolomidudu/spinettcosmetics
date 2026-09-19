@@ -57,7 +57,7 @@ const BeautyInfo = ({ kind }: BeautyInfoProps) => {
               </details>
             ))}
           </div>
-          <Link href="/shop-with-sidebar" className="mt-10 inline-flex border-b border-[#A47768] pb-1 font-medium text-[#8C6254]">Continue shopping</Link>
+          <Link href="/our-store" className="mt-10 inline-flex border-b border-[#A47768] pb-1 font-medium text-[#8C6254]">Continue shopping</Link>
         </div>
       </main>
     </>

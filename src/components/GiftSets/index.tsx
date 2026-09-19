@@ -27,7 +27,7 @@ const GiftSets = () => (
               <h2 className="mt-7 text-2xl font-medium text-dark">{set.title}</h2>
               <p className="mt-2 leading-7 text-dark-3">{set.description}</p>
               <p className="mt-5 text-lg font-medium text-[#A65F6B]">{set.price} <span className="ml-2 text-sm text-dark-4 line-through">{set.was}</span></p>
-              <Link href="/shop-with-sidebar?category=Gift%20Sets" className="mt-6 inline-flex bg-blue px-6 py-3 text-sm font-medium text-white hover:bg-blue-dark">Shop this set</Link>
+              <Link href="/our-store?category=Gift%20Sets" className="mt-6 inline-flex bg-blue px-6 py-3 text-sm font-medium text-white hover:bg-blue-dark">Shop this set</Link>
             </article>
           ))}
         </div>

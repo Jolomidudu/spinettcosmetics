@@ -120,8 +120,8 @@ const CounDown = () => {
             height={482}
           />
           <Image
-            src="/images/products/product-8-bg-1.png"
-            alt="Daily Mineral Sunscreen"
+            src="/images/products/fair-white/so-white-essentials-kit.png"
+            alt="So White Essentials Kit"
             className="hidden lg:block absolute right-4 xl:right-33 bottom-4 xl:bottom-10 -z-1"
             width={411}
             height={376}

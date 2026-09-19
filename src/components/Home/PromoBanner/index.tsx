@@ -29,8 +29,8 @@ const PromoBanner = () => {
           </div>
 
           <Image
-            src="/images/products/product-1-bg-1.png"
-            alt="Rose Renewal Serum"
+            src="/images/products/fair-white/so-white-dark-spot-gel.png"
+            alt="So White Skin Perfector Dark Spot Corrector Gel"
             className="absolute bottom-0 right-4 lg:right-26 -z-1"
             width={274}
             height={350}
@@ -41,8 +41,8 @@ const PromoBanner = () => {
           {/* <!-- promo banner small --> */}
           <div className="relative z-1 overflow-hidden rounded-lg bg-[#DBF4F3] py-10 xl:py-16 px-4 sm:px-7.5 xl:px-10">
             <Image
-              src="/images/products/product-5-bg-1.png"
-              alt="Cocoa Silk Body Butter"
+              src="/images/products/fair-white/so-white-brightening-body-lotion.jpg"
+              alt="So White Brightening Body Lotion"
               className="absolute top-1/2 -translate-y-1/2 left-3 sm:left-10 -z-1"
               width={241}
               height={241}
@@ -73,8 +73,8 @@ const PromoBanner = () => {
           {/* <!-- promo banner small --> */}
           <div className="relative z-1 overflow-hidden rounded-lg bg-[#FFECE1] py-10 xl:py-16 px-4 sm:px-7.5 xl:px-10">
             <Image
-              src="/images/products/product-7-bg-1.png"
-              alt="Hydra Lip Sleeping Mask"
+              src="/images/products/fair-white/so-white-brightening-shower-gel.png"
+              alt="So White Brightening Shower Gel"
               className="absolute top-1/2 -translate-y-1/2 right-3 sm:right-8.5 -z-1"
               width={200}
               height={200}

@@ -2,7 +2,7 @@ import { Product } from "@/types/product";
 
 const shopData: Product[] = [
   {
-    title: "Rose Renewal Serum",
+    title: "So White Skin Perfector Dark Spot Corrector Gel 30ml",
     category: "Skincare",
     description: "A cushion-light daily serum that leaves tired skin visibly brighter and deeply replenished.",
     benefits: ["Brightens dull-looking skin", "Supports a softer, smoother texture", "Delivers lasting hydration"],
@@ -20,17 +20,17 @@ const shopData: Product[] = [
     id: 1,
     imgs: {
       thumbnails: [
-        "/images/products/product-1-sm-1.png",
-        "/images/products/product-1-sm-2.png",
+        "/images/products/fair-white/so-white-dark-spot-gel.png",
+        "/images/products/fair-white/so-white-dark-spot-gel.png",
       ],
       previews: [
-        "/images/products/product-1-bg-1.png",
-        "/images/products/product-1-bg-2.png",
+        "/images/products/fair-white/so-white-dark-spot-gel.png",
+        "/images/products/fair-white/so-white-dark-spot-gel.png",
       ],
     },
   },
   {
-    title: "Velvet Skin Cleanser",
+    title: "So White Exfoliating Soap Bar 200g",
     category: "Skincare",
     description: "A creamy, non-foaming cleanser that melts away the day without leaving skin tight or stripped.",
     benefits: ["Gently removes makeup and SPF", "Protects the moisture barrier", "Leaves skin supple and calm"],
@@ -47,17 +47,17 @@ const shopData: Product[] = [
     id: 2,
     imgs: {
       thumbnails: [
-        "/images/products/product-2-sm-1.png",
-        "/images/products/product-2-sm-2.png",
+        "/images/products/fair-white/so-white-exfoliating-soap.jpg",
+        "/images/products/fair-white/so-white-exfoliating-soap.jpg",
       ],
       previews: [
-        "/images/products/product-2-bg-1.png",
-        "/images/products/product-2-bg-2.png",
+        "/images/products/fair-white/so-white-exfoliating-soap.jpg",
+        "/images/products/fair-white/so-white-exfoliating-soap.jpg",
       ],
     },
   },
   {
-    title: "Cloud Dew Facial Mist",
+    title: "So White Skin Perfector Brightening Cream 50ml",
     category: "Skincare",
     description: "A fine, cooling veil of botanical hydration for an instant reset wherever your day takes you.",
     benefits: ["Refreshes skin on contact", "Replenishes surface hydration", "Sets makeup with a dewy finish"],
@@ -74,17 +74,17 @@ const shopData: Product[] = [
     id: 3,
     imgs: {
       thumbnails: [
-        "/images/products/product-3-sm-1.png",
-        "/images/products/product-3-sm-2.png",
+        "/images/products/fair-white/so-white-brightening-cream.jpg",
+        "/images/products/fair-white/so-white-brightening-cream.jpg",
       ],
       previews: [
-        "/images/products/product-3-bg-1.png",
-        "/images/products/product-3-bg-2.png",
+        "/images/products/fair-white/so-white-brightening-cream.jpg",
+        "/images/products/fair-white/so-white-brightening-cream.jpg",
       ],
     },
   },
   {
-    title: "Soft Focus Foundation",
+    title: "So White Brightening Body Oil With Almond Oil 250ml",
     category: "Complexion",
     description: "Buildable, breathable coverage with a soft-focus finish that still looks like your skin.",
     benefits: ["Evens the look of skin tone", "Blurs without looking heavy", "Wears comfortably all day"],
@@ -107,17 +107,17 @@ const shopData: Product[] = [
     id: 4,
     imgs: {
       thumbnails: [
-        "/images/products/product-4-sm-1.png",
-        "/images/products/product-4-sm-2.png",
+        "/images/products/fair-white/so-white-brightening-oil.png",
+        "/images/products/fair-white/so-white-brightening-oil.png",
       ],
       previews: [
-        "/images/products/product-4-bg-1.png",
-        "/images/products/product-4-bg-2.png",
+        "/images/products/fair-white/so-white-brightening-oil.png",
+        "/images/products/fair-white/so-white-brightening-oil.png",
       ],
     },
   },
   {
-    title: "Cocoa Silk Body Butter",
+    title: "So White Skin Perfector Brightening Body Lotion 500ml",
     category: "Body Care",
     description: "A rich but quick-melting body cream that wraps dry skin in a silky cocoa-scented veil.",
     benefits: ["Softens rough, dry patches", "Seals in moisture", "Leaves skin touchably smooth"],
@@ -135,17 +135,17 @@ const shopData: Product[] = [
     id: 5,
     imgs: {
       thumbnails: [
-        "/images/products/product-5-sm-1.png",
-        "/images/products/product-5-sm-2.png",
+        "/images/products/fair-white/so-white-brightening-body-lotion.jpg",
+        "/images/products/fair-white/so-white-brightening-body-lotion.jpg",
       ],
       previews: [
-        "/images/products/product-5-bg-1.png",
-        "/images/products/product-5-bg-2.png",
+        "/images/products/fair-white/so-white-brightening-body-lotion.jpg",
+        "/images/products/fair-white/so-white-brightening-body-lotion.jpg",
       ],
     },
   },
   {
-    title: "Nourishing Hair Elixir",
+    title: "So White Brightening Shower Gel 1000ml",
     category: "Hair Care",
     description: "A weightless oil blend that smooths ends, softens strands, and gives hair a healthy-looking glow.",
     benefits: ["Smooths frizz and flyaways", "Adds luminous shine", "Nourishes dry ends"],
@@ -162,17 +162,17 @@ const shopData: Product[] = [
     id: 6,
     imgs: {
       thumbnails: [
-        "/images/products/product-6-sm-1.png",
-        "/images/products/product-6-sm-2.png",
+        "/images/products/fair-white/so-white-brightening-shower-gel.png",
+        "/images/products/fair-white/so-white-brightening-shower-gel.png",
       ],
       previews: [
-        "/images/products/product-6-bg-1.png",
-        "/images/products/product-6-bg-2.png",
+        "/images/products/fair-white/so-white-brightening-shower-gel.png",
+        "/images/products/fair-white/so-white-brightening-shower-gel.png",
       ],
     },
   },
   {
-    title: "Hydra Lip Sleeping Mask",
+    title: "So White Exfoliating Shower Gel With Tonic Scrub 940ml",
     category: "Lip Care",
     description: "An overnight cushion for lips that wake up visibly smoother, softer, and comforted.",
     benefits: ["Intensely hydrates overnight", "Smooths the look of fine lines", "Comforts dry, chapped lips"],
@@ -189,17 +189,17 @@ const shopData: Product[] = [
     id: 7,
     imgs: {
       thumbnails: [
-        "/images/products/product-7-sm-1.png",
-        "/images/products/product-7-sm-2.png",
+        "/images/products/fair-white/so-white-exfoliating-shower-gel.png",
+        "/images/products/fair-white/so-white-exfoliating-shower-gel.png",
       ],
       previews: [
-        "/images/products/product-7-bg-1.png",
-        "/images/products/product-7-bg-2.png",
+        "/images/products/fair-white/so-white-exfoliating-shower-gel.png",
+        "/images/products/fair-white/so-white-exfoliating-shower-gel.png",
       ],
     },
   },
   {
-    title: "Daily Mineral Sunscreen",
+    title: "So White Essentials Kit",
     category: "Sun Care",
     description: "A sheer mineral SPF that protects daily while leaving skin comfortable, fresh, and glow-ready.",
     benefits: ["Broad-spectrum SPF 30 protection", "Helps defend against dryness", "Layers under makeup"],
@@ -216,12 +216,12 @@ const shopData: Product[] = [
     id: 8,
     imgs: {
       thumbnails: [
-        "/images/products/product-8-sm-1.png",
-        "/images/products/product-8-sm-2.png",
+        "/images/products/fair-white/so-white-essentials-kit.png",
+        "/images/products/fair-white/so-white-essentials-kit.png",
       ],
       previews: [
-        "/images/products/product-8-bg-1.png",
-        "/images/products/product-8-bg-2.png",
+        "/images/products/fair-white/so-white-essentials-kit.png",
+        "/images/products/fair-white/so-white-essentials-kit.png",
       ],
     },
   },

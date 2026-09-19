@@ -6,19 +6,19 @@ const routines = [
     step: "01 / Reset",
     title: "Cleanse softly",
     description: "Start with a calm, comfortable canvas that never feels stripped.",
-    image: "/images/products/product-2-bg-1.png",
+    image: "/images/products/fair-white/so-white-exfoliating-soap.jpg",
   },
   {
     step: "02 / Treat",
     title: "Layer your glow",
     description: "Target dullness and dehydration with concentrated, skin-loving care.",
-    image: "/images/products/product-1-bg-1.png",
+    image: "/images/products/fair-white/so-white-dark-spot-gel.png",
   },
   {
     step: "03 / Protect",
     title: "Keep it luminous",
     description: "Seal in comfort and finish every morning with daily mineral SPF.",
-    image: "/images/products/product-8-bg-1.png",
+    image: "/images/products/fair-white/so-white-essentials-kit.png",
   },
 ];
 

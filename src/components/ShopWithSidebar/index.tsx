@@ -125,8 +125,6 @@ const ShopWithSidebar = () => {
   });
 
   useEffect(() => {
-    window.addEventListener("scroll", handleStickyMenu);
-
     const params = new URLSearchParams(window.location.search);
     const category = params.get("category");
     const concern = params.get("concern");
@@ -144,6 +142,15 @@ const ShopWithSidebar = () => {
       ...(routineStep ? { routineStep: [routineStep] } : {}),
     }));
 
+    window.addEventListener("scroll", handleStickyMenu);
+
+    return () => {
+      window.removeEventListener("scroll", handleStickyMenu);
+    };
+  }, []);
+
+  useEffect(() => {
+
     // closing sidebar while clicking outside
     function handleClickOutside(event) {
       if (!event.target.closest(".sidebar-content")) {
@@ -158,13 +165,13 @@ const ShopWithSidebar = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  });
+  }, [productSidebar]);
 
   return (
     <>
       <Breadcrumb
         title={"Explore All Products"}
-        pages={["shop", "/", "shop with sidebar"]}
+        pages={["store", "/", "our store"]}
       />
       <section className="overflow-hidden relative pb-20 pt-5 lg:pt-20 xl:pt-28 bg-[#F7EEEA]">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">

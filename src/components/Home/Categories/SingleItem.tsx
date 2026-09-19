@@ -6,7 +6,7 @@ const SingleItem = ({ item }: { item: Category }) => {
   const category = item.title === "Skin Care" ? "Skincare" : item.title;
 
   return (
-    <a href={`/shop-with-sidebar?category=${encodeURIComponent(category)}`} className="group flex flex-col items-center">
+    <a href={`/our-store?category=${encodeURIComponent(category)}`} className="group flex flex-col items-center">
       <div className="max-w-[130px] w-full bg-[#F2F3F8] h-32.5 rounded-full flex items-center justify-center mb-4">
         <Image src={item.img} alt="Category" width={82} height={62} />
       </div>

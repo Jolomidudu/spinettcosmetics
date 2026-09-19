@@ -8,7 +8,7 @@ const routines = [
     title: "Soft morning glow",
     description: "Cleanse, replenish, and protect in three easy layers.",
     products: [2, 1, 8],
-    href: "/shop-with-sidebar?routineStep=cleanse",
+    href: "/our-store?routineStep=cleanse",
     tone: "bg-[#F8E9E4]",
   },
   {
@@ -16,7 +16,7 @@ const routines = [
     title: "Dry skin, cared for",
     description: "A richer, softer routine for skin asking for extra comfort.",
     products: [2, 5, 7],
-    href: "/shop-with-sidebar?concern=Dryness",
+    href: "/our-store?concern=Dryness",
     tone: "bg-[#F3E8D9]",
   },
 ];
@@ -39,10 +39,10 @@ const gifts = [
 ];
 
 const concerns = [
-  { title: "Dullness", detail: "Bring back the light", href: "/shop-with-sidebar?concern=Dullness" },
-  { title: "Dehydration", detail: "Find your water layers", href: "/shop-with-sidebar?concern=Dehydration" },
-  { title: "Sensitivity", detail: "Care for a calm barrier", href: "/shop-with-sidebar?concern=Sensitivity" },
-  { title: "Dryness", detail: "Meet your comfort ritual", href: "/shop-with-sidebar?concern=Dryness" },
+  { title: "Dullness", detail: "Bring back the light", href: "/our-store?concern=Dullness" },
+  { title: "Dehydration", detail: "Find your water layers", href: "/our-store?concern=Dehydration" },
+  { title: "Sensitivity", detail: "Care for a calm barrier", href: "/our-store?concern=Sensitivity" },
+  { title: "Dryness", detail: "Meet your comfort ritual", href: "/our-store?concern=Dryness" },
 ];
 
 const getProducts = (ids: number[]) => ids.map((id) => shopData.find((product) => product.id === id)).filter(Boolean);
@@ -114,7 +114,7 @@ const BeautyFeatures = () => {
               <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-[#A47768]">Ingredient spotlight</p>
               <h2 className="font-semibold text-2xl text-dark sm:text-3xl">Rosehip oil, made for the glow.</h2>
               <p className="mt-5 leading-7 text-dark-3">A naturally nourishing oil with a lightweight feel, chosen to help skin look brighter, smoother, and deeply cared for.</p>
-              <Link href="/shop-with-sidebar?ingredient=Rosehip%20oil" className="mt-7 inline-flex border-b border-[#A47768] pb-1 text-sm font-medium text-[#8C6254]">Shop rosehip formulas</Link>
+              <Link href="/our-store?ingredient=Rosehip%20oil" className="mt-7 inline-flex border-b border-[#A47768] pb-1 text-sm font-medium text-[#8C6254]">Shop rosehip formulas</Link>
             </div>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               {["Brightening", "Nourishing", "Lightweight", "Plant-powered"].map((label, index) => (
