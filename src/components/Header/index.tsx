@@ -185,14 +185,6 @@ const Header = () => {
                     />
                   </svg>
 
-                  <div>
-                    <span className="block text-2xs text-dark-4 uppercase">
-                      account
-                    </span>
-                    <p className="font-medium text-custom-sm text-dark">
-                      Sign In
-                    </p>
-                  </div>
                 </Link>
 
                 <button
