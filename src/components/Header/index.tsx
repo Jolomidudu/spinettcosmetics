@@ -56,7 +56,7 @@ const Header = () => {
       <div className="max-w-[1170px] mx-auto px-4 sm:px-7.5 xl:px-0">
         {/* <!-- header top start --> */}
         <div
-          className={`flex flex-col lg:flex-row gap-5 items-end lg:items-center xl:justify-between ease-out duration-200 ${
+          className={`relative flex flex-col lg:flex-row gap-5 items-end lg:items-center xl:justify-between ease-out duration-200 ${
             stickyMenu ? "py-4" : "py-6"
           }`}
         >
@@ -69,8 +69,9 @@ const Header = () => {
                 width={60}
                 height={10}
               />
-              <span className="whitespace-nowrap text-lg font-semibold tracking-[0.02em] text-dark">
-                Spinett Cosmetics
+              <span className="text-lg font-semibold tracking-[0.02em] text-dark leading-tight">
+                <span className="block whitespace-nowrap">Spinett</span>
+                <span className="block whitespace-nowrap">Cosmetics</span>
               </span>
             </Link>
 
@@ -119,7 +120,7 @@ const Header = () => {
           </div>
 
           {/* <!-- header top right --> */}
-          <div className="flex w-full lg:w-auto items-center gap-7.5">
+          <div className="absolute right-0 top-5 flex w-auto lg:static lg:w-auto items-center gap-7.5">
             <div className="hidden xl:flex items-center gap-3.5">
               <svg
                 width="24"
@@ -159,7 +160,7 @@ const Header = () => {
             {/* <!-- divider --> */}
             <span className="hidden xl:block w-px h-7.5 bg-gray-4"></span>
 
-            <div className="flex w-full lg:w-auto justify-between items-center gap-5">
+            <div className="flex w-auto lg:w-auto justify-between items-center gap-5">
               <div className="flex items-center gap-5">
                 <Link href="/signin" className="flex items-center gap-2.5">
                   <svg
