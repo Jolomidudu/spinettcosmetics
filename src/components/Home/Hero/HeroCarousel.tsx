@@ -95,7 +95,7 @@ const HeroCarousal = () => {
 
           <div>
             <Image
-              src="/images/hero/hero-01.png"
+              src="/images/hero/swg.webp"
               alt="beauty collection"
               width={351}
               height={358}
