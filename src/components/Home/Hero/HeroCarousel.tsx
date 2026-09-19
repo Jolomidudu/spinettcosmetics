@@ -2,11 +2,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 
-// Swiper's pagination stylesheet is resolved at runtime, but may not expose
-// TypeScript declarations in some Swiper versions.
-// @ts-expect-error -- stylesheet side-effect import has no type declarations.
 import "swiper/css/pagination";
-// @ts-expect-error -- stylesheet side-effect import has no type declarations.
 import "swiper/css";
 
 import Image from "next/image";

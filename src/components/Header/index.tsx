@@ -68,6 +68,7 @@ const Header = () => {
                 alt="Logo"
                 width={60}
                 height={10}
+                className="w-[42px] h-auto sm:w-[60px]"
               />
               <span className="text-lg font-semibold tracking-[0.02em] text-dark leading-tight">
                 <span className="block whitespace-nowrap">Spinett</span>
