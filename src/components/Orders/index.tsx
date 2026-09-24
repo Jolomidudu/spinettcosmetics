@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from "react";
 import SingleOrder from "./SingleOrder";
-import ordersData from "./ordersData";
 
 const Orders = () => {
-  const [orders, setOrders] = useState<any>([]);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`/api/order`)
+    fetch(`/api/orders`)
       .then((res) => res.json())
       .then((data) => {
-        setOrders(data.orders);
+        const normalized = (data.orders || []).map((order: any) => ({
+          ...order,
+          orderId: order.orderId || order.id,
+          createdAt: order.createdAt || order.created_at,
+          orderTitle: order.orderTitle || order.title,
+          title: order.title || order.orderTitle || "Order",
+        }));
+
+        setOrders(normalized);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err.message);
+        setOrders([]);
+        setIsLoading(false);
       });
   }, []);
 
@@ -20,8 +31,7 @@ const Orders = () => {
     <>
       <div className="w-full overflow-x-auto">
         <div className="min-w-[770px]">
-          {/* <!-- order item --> */}
-          {ordersData.length > 0 && (
+          {orders.length > 0 && (
             <div className="items-center justify-between py-4.5 px-7.5 hidden md:flex ">
               <div className="min-w-[111px]">
                 <p className="text-custom-sm text-dark">Order</p>
@@ -47,8 +57,11 @@ const Orders = () => {
               </div>
             </div>
           )}
-          {ordersData.length > 0 ? (
-            ordersData.map((orderItem, key) => (
+
+          {isLoading ? (
+            <p className="py-9.5 px-4 sm:px-7.5 xl:px-10">Loading orders...</p>
+          ) : orders.length > 0 ? (
+            orders.map((orderItem, key) => (
               <SingleOrder key={key} orderItem={orderItem} smallView={false} />
             ))
           ) : (
@@ -58,8 +71,8 @@ const Orders = () => {
           )}
         </div>
 
-        {ordersData.length > 0 &&
-          ordersData.map((orderItem, key) => (
+        {!isLoading && orders.length > 0 &&
+          orders.map((orderItem, key) => (
             <SingleOrder key={key} orderItem={orderItem} smallView={true} />
           ))}
       </div>

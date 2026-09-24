@@ -1,13 +1,114 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumb from "../Common/Breadcrumb";
 import Image from "next/image";
 import AddressModal from "./AddressModal";
 import Orders from "../Orders";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 const MyAccount = () => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("dashboard");
   const [addressModal, setAddressModal] = useState(false);
+  const [userName, setUserName] = useState("Customer");
+  const [memberSince, setMemberSince] = useState("Member");
+  const [shippingAddress, setShippingAddress] = useState<string>("No shipping address yet.");
+  const [billingAddress, setBillingAddress] = useState<string>("No billing address yet.");
+  const [emailAddress, setEmailAddress] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    const loadUser = async () => {
+      const { data, error } = await supabase.auth.getUser();
+
+      if (error || !data.user) {
+        router.push("/signin");
+        return;
+      }
+
+      const fullName =
+        data.user.user_metadata?.full_name ||
+        data.user.email?.split("@")[0] ||
+        "Customer";
+      setUserName(fullName);
+      setEmailAddress(data.user.email || "");
+      setPhoneNumber(data.user.phone || data.user.user_metadata?.phone || "");
+      setMemberSince(
+        data.user.created_at
+          ? new Date(data.user.created_at).toLocaleDateString("en-US", {
+              month: "short",
+              year: "numeric",
+            })
+          : "Member",
+      );
+
+      const { data: addresses, error: addressesError } = await supabase
+        .from("addresses")
+        .select("full_name, phone, address_line1, address_line2, city, state, postal_code, country, is_default")
+        .eq("user_id", data.user.id)
+        .order("created_at", { ascending: false });
+
+      if (!addressesError && addresses && addresses.length > 0) {
+        const primaryAddress = addresses[0];
+        const formatted = [
+          primaryAddress.address_line1,
+          primaryAddress.address_line2,
+          [primaryAddress.city, primaryAddress.state, primaryAddress.postal_code]
+            .filter(Boolean)
+            .join(", "),
+          primaryAddress.country,
+        ]
+          .filter(Boolean)
+          .join(" ");
+
+        setShippingAddress(formatted || "No shipping address yet.");
+        setBillingAddress(formatted || "No billing address yet.");
+
+        if (primaryAddress.full_name) setUserName(primaryAddress.full_name);
+        if (primaryAddress.phone) setPhoneNumber(primaryAddress.phone);
+      }
+    };
+
+    loadUser();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_OUT") {
+        router.push("/signin");
+        return;
+      }
+
+      const safeName =
+        session?.user?.user_metadata?.full_name ||
+        session?.user?.email?.split("@")[0] ||
+        "Customer";
+      setUserName(safeName);
+      setEmailAddress(session?.user?.email || "");
+      setPhoneNumber(session?.user?.phone || session?.user?.user_metadata?.phone || "");
+      setMemberSince(
+        session?.user?.created_at
+          ? new Date(session.user.created_at).toLocaleDateString("en-US", {
+              month: "short",
+              year: "numeric",
+            })
+          : "Member",
+      );
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [router]);
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/");
+  };
 
   const openAddressModal = () => {
     setAddressModal(true);
@@ -38,10 +139,8 @@ const MyAccount = () => {
                   </div>
 
                   <div>
-                    <p className="font-medium text-dark mb-0.5">
-                      James Septimus
-                    </p>
-                    <p className="text-custom-xs">Member Since Sep 2020</p>
+                    <p className="font-medium text-dark mb-0.5">{userName}</p>
+                    <p className="text-custom-xs">Member Since {memberSince}</p>
                   </div>
                 </div>
 
@@ -219,7 +318,10 @@ const MyAccount = () => {
                     </button>
 
                     <button
-                      onClick={() => setActiveTab("logout")}
+                      onClick={() => {
+                        setActiveTab("logout");
+                        handleSignOut();
+                      }}
                       className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
                         activeTab === "logout"
                           ? "text-white bg-blue"
@@ -261,13 +363,14 @@ const MyAccount = () => {
               }`}
             >
               <p className="text-dark">
-                Hello Annie (not Annie?
-                <a
-                  href="#"
+                Hello {userName} (
+                <button
+                  type="button"
+                  onClick={handleSignOut}
                   className="text-red ease-out duration-200 hover:underline"
                 >
                   Log Out
-                </a>
+                </button>
                 )
               </p>
 
@@ -357,7 +460,7 @@ const MyAccount = () => {
                           fill=""
                         />
                       </svg>
-                      Name: James Septimus
+                      Name: {userName}
                     </p>
 
                     <p className="flex items-center gap-2.5 text-custom-sm">
@@ -376,7 +479,7 @@ const MyAccount = () => {
                           fill=""
                         />
                       </svg>
-                      Email: hello@spinettcosmetics.com
+                      Email: {emailAddress || "No email available"}
                     </p>
 
                     <p className="flex items-center gap-2.5 text-custom-sm">
@@ -405,7 +508,7 @@ const MyAccount = () => {
                           fill=""
                         />
                       </svg>
-                      Phone: 1234 567890
+                      Phone: {phoneNumber || "No phone number"}
                     </p>
 
                     <p className="flex gap-2.5 text-custom-sm">
@@ -431,7 +534,7 @@ const MyAccount = () => {
                           </clipPath>
                         </defs>
                       </svg>
-                      Address: 7398 Smoke Ranch RoadLas Vegas, Nevada 89128
+                      Address: {shippingAddress}
                     </p>
                   </div>
                 </div>
@@ -489,7 +592,7 @@ const MyAccount = () => {
                           fill=""
                         />
                       </svg>
-                      Name: James Septimus
+                      Name: {userName}
                     </p>
 
                     <p className="flex items-center gap-2.5 text-custom-sm">
@@ -508,7 +611,7 @@ const MyAccount = () => {
                           fill=""
                         />
                       </svg>
-                      Email: hello@spinettcosmetics.com
+                      Email: {emailAddress || "No email available"}
                     </p>
 
                     <p className="flex items-center gap-2.5 text-custom-sm">
@@ -537,7 +640,7 @@ const MyAccount = () => {
                           fill=""
                         />
                       </svg>
-                      Phone: 1234 567890
+                      Phone: {phoneNumber || "No phone number"}
                     </p>
 
                     <p className="flex gap-2.5 text-custom-sm">
@@ -563,7 +666,7 @@ const MyAccount = () => {
                           </clipPath>
                         </defs>
                       </svg>
-                      Address: 7398 Smoke Ranch RoadLas Vegas, Nevada 89128
+                      Address: {billingAddress}
                     </p>
                   </div>
                 </div>
@@ -721,7 +824,14 @@ const MyAccount = () => {
         </div>
       </section>
 
-      <AddressModal isOpen={addressModal} closeModal={closeAddressModal} />
+      <AddressModal
+        isOpen={addressModal}
+        closeModal={closeAddressModal}
+        userName={userName}
+        emailAddress={emailAddress}
+        phoneNumber={phoneNumber}
+        shippingAddress={shippingAddress}
+      />
     </>
   );
 };

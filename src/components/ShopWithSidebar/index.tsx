@@ -107,7 +107,7 @@ const ShopWithSidebar = () => {
     return Object.entries(activeFilters).every(([key, values]) => {
       if (!values.length) return true;
       if (key === "category" && values.includes("Gift Sets")) {
-        return [1, 2, 5, 7, 8].includes(product.id);
+        return typeof product.id === "number" && [1, 2, 5, 7, 8].includes(product.id);
       }
       const productValues = key === "category" || key === "routineStep" || key === "finish"
         ? [product[key as keyof Product] as string]
@@ -120,8 +120,8 @@ const ShopWithSidebar = () => {
     if (sortBy === "price-low") return first.discountedPrice - second.discountedPrice;
     if (sortBy === "price-high") return second.discountedPrice - first.discountedPrice;
     if (sortBy === "rating") return second.reviews - first.reviews;
-    if (sortBy === "newest") return second.id - first.id;
-    return first.id - second.id;
+    if (sortBy === "newest") return String(second.id).localeCompare(String(first.id));
+    return String(first.id).localeCompare(String(second.id));
   });
 
   useEffect(() => {

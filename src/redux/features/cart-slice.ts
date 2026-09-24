@@ -6,7 +6,7 @@ type InitialState = {
 };
 
 type CartItem = {
-  id: number;
+  id: number | string;
   title: string;
   price: number;
   discountedPrice: number;
@@ -43,7 +43,7 @@ export const cart = createSlice({
         });
       }
     },
-    removeItemFromCart: (state, action: PayloadAction<number>) => {
+    removeItemFromCart: (state, action: PayloadAction<number | string>) => {
       const itemId = action.payload;
       state.items = state.items.filter((item) => item.id !== itemId);
     },
